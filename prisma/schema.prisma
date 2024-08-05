@@ -1,0 +1,32 @@
+// prisma/schema.prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+model Employee {
+  id             Int      @id @default(autoincrement())
+  name           String
+  emp_id         String   @unique
+  address        String?
+  dateOfJoining  DateTime
+  mobile         String?
+  email          String   @unique
+}
+ 
+model EmployeeAttendance {
+  id             Int      @id @default(autoincrement())
+  empId          String   // Reference to the employee ID
+  empName        String
+  checkinTime    DateTime
+  checkoutTime   DateTime?
+  status         String   // 'Present' or 'Absent'
+  date           DateTime
+ 
+
+}
